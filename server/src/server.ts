@@ -1,8 +1,10 @@
 import path from "node:path";
+import cookieParser from "cookie-parser";
 import cors from "cors";
 import express from "express";
 import { prisma } from "./config/database.ts";
-import cookieParser from "cookie-parser";
+
+import authRouter from "./routers/authRouter.ts";
 
 const app = express();
 
@@ -18,6 +20,8 @@ app.use(
 app.use(cookieParser());
 
 app.use("/static/images", express.static(path.join(process.cwd(), "images")));
+
+app.use("/api/auth", authRouter);
 
 const start = async () => {
 	try {

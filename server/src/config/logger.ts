@@ -38,14 +38,14 @@ const print = (level: "info" | "warn" | "error", message: unknown[]) => {
 	);
 };
 
-export const info = (...args: unknown[]) => {
+export const logInfo = (...args: unknown[]) => {
 	print("info", args);
 };
 
-export const warn = (...args: unknown[]) => {
+export const logWarn = (...args: unknown[]) => {
 	print("warn", args);
 };
 
-export const error = (...args: unknown[]) => {
+export const logError = (...args: unknown[]) => {
 	print("error", args);
 };

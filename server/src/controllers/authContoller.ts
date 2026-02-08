@@ -3,7 +3,8 @@ import type { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import { z } from "zod";
 import { prisma } from "../config/database.ts";
-import { error } from "../config/logger.ts";
+import { logError } from "../config/logger.ts";
+import type { MutatedRequest } from "../types/authTypes.ts";
 
 if (!process.env.JWT_SECRET) {
 	throw new Error("JWT_SECRET is not defined in the environment variables.");
@@ -71,23 +72,23 @@ export const signUp = async (req: Request, res: Response) => {
 			});
 		}
 
-		error("SignUp error:", err);
+		logError("SignUp error:", err);
 		return res.status(500).json({ error: "Internal Server Error" });
 	}
 };
 
 const loginSchema = z.strictObject({
-	identifier: z.string().min(1, "Email or Username is required"),
+	email: z.string().min(1, "Email is required"),
 	password: z.string().min(1, "Password is required"),
 });
 
 export const logIn = async (req: Request, res: Response) => {
 	try {
-		const { identifier, password } = loginSchema.parse(req.body);
+		const { email, password } = loginSchema.parse(req.body);
 
 		const user = await prisma.user.findFirst({
 			where: {
-				OR: [{ email: identifier }, { username: identifier }],
+				email,
 			},
 			select: {
 				id: true,
@@ -97,7 +98,7 @@ export const logIn = async (req: Request, res: Response) => {
 			},
 		});
 
-		const invalidCredentialsMsg = "Invalid email/username or password";
+		const invalidCredentialsMsg = "Invalid email or password";
 
 		if (!user) {
 			return res.status(401).json({ error: invalidCredentialsMsg });
@@ -109,7 +110,6 @@ export const logIn = async (req: Request, res: Response) => {
 			return res.status(401).json({ error: invalidCredentialsMsg });
 		}
 
-		// Generate Token
 		const isProduction = process.env.NODE_ENV === "production";
 		const jwtToken = jwt.sign(
 			{ id: user.id },
@@ -139,23 +139,25 @@ export const logIn = async (req: Request, res: Response) => {
 				})),
 			});
 		}
-		error("Login error:", err);
+		logError("Login error:", err);
 		return res.status(500).json({ error: "Internal Server Error" });
 	}
 };
 
-export const getMe = async (req: Request, res: Response) => {
-	try {
-		// TODO: Implement logic of middleware, and get me
-		const userId = req.userId;
+export const getMe = async (req: MutatedRequest, res: Response) => {
+	const userId = req.userId;
 
+	if (!userId) {
+		return res.status(401).json({ error: "Unauthorized" });
+	}
+
+	try {
 		const user = await prisma.user.findUnique({
 			where: { id: userId },
 			select: {
 				id: true,
 				email: true,
 				username: true,
-				created_at: true,
 			},
 		});
 
@@ -165,7 +167,7 @@ export const getMe = async (req: Request, res: Response) => {
 
 		return res.status(200).json({ user });
 	} catch (err) {
-		error("GetMe error:", err);
+		logError("GetMe error:", err);
 		return res.status(500).json({ error: "Internal Server Error" });
 	}
 };
