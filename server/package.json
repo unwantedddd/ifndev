@@ -4,12 +4,13 @@
 	"type": "module",
 	"private": true,
 	"scripts": {
-		"dev": "bun --bun --watch --env-file=../.env /src/server.ts",
-		"prod": "bun --bun /src/server.ts",
+		"dev": "bun --bun --watch --env-file=../.env src/server.ts",
+		"prod": "bun --bun src/server.ts",
 		"db:pull": "bunx --env-file=../.env prisma db pull",
 		"db:gen": "bunx --env-file=../.env prisma generate",
 		"db:migrate": "bunx --env-file=../.env prisma migrate dev",
-		"db:studio": "bunx --env-file=../.env prisma studio"
+		"db:studio": "bunx --env-file=../.env prisma studio",
+		"postinstall": "bun run db:gen"
 	},
 	"dependencies": {
 		"@abcx3/prisma-bun-adapter": "^1.3.1",
