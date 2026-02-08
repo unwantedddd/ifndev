@@ -4,3 +4,7 @@ import { Footer as HomeFooter, Header as HomeHeader } from "@/widgets/home";
 export const HomeLayout = () => (
 	<Layout header={<HomeHeader />} footer={<HomeFooter />} />
 );
+
+export const AuthLayout = () => (
+	<Layout header={<HomeHeader />} footer={<HomeFooter />} />
+);
