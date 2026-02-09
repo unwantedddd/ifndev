@@ -1,11 +1,5 @@
-import type { FC, ReactNode } from "react";
-
-interface SignUpProps {
-	children?: ReactNode;
-}
-
-const SignUp: FC<SignUpProps> = ({ children }) => {
-	return <div className="flex-1">{children}</div>;
+const SignUp = () => {
+	return <div className="flex-1">SignUp</div>;
 };
 
 export default SignUp;
