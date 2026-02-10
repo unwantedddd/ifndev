@@ -3,7 +3,7 @@ import { Link } from "react-router";
 
 const Header = () => {
   return (
-    <div className="w-full">
+    <div className="w-full sticky top-0">
       <div className="mx-auto max-w-4xl p-4 mt-4 bg-card rounded-lg flex items-center justify-between shadow-2xl">
         <Link to="/">
           <Logo />

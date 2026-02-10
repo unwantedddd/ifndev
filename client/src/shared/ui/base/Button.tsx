@@ -1,4 +1,4 @@
-import { cn } from "@/shared";
+import { cn } from "@/shared/model";
 import type { ButtonHTMLAttributes, FC, ReactNode } from "react";
 
 type Variant = "primary" | "secondary" | "ghost" | "danger";
