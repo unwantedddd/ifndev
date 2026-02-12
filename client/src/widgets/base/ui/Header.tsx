@@ -19,15 +19,15 @@ const Header = () => {
           </li>
           <li>
             <Link
-              to="/challenges"
+              to="/problems/test"
               className="text-foreground hover:text-primary transition-colors text-lg font-medium"
             >
-              Challenges
+              Problems
             </Link>
           </li>
           <li>
             <Link
-              to="/forum"
+              to="/forum/test"
               className="text-foreground hover:text-primary transition-colors text-lg font-medium"
             >
               Forums
@@ -39,7 +39,7 @@ const Header = () => {
               className="text-foreground hover:text-primary transition-colors text-lg font-medium"
             >
               <Button
-                className="rounded-md px-6 text-lg font-medium"
+                className="rounded-md px-6 text-lg font-medium cursor-pointer"
                 variant="primary"
                 size="large"
               >
