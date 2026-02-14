@@ -8,7 +8,9 @@ import { Problems, CreateProblem } from "@/pages/problems";
 import { AboutUs, Careers, Blog } from "@/pages/company";
 import { Customers, Pricing, Newability } from "@/pages/product";
 import { Contacts, Community } from "@/pages/resources";
-import { AuthLayout, ForumLayout, HomeLayout, PlaygroundLayout, ProblemsLayout, CompanyLayout, ResourcesLayout, ProductLayout } from "./RouteLayouts";
+import { Articles } from "@/pages/articles";
+import { PageNotFound } from "@/pages/error";
+import { AuthLayout, ForumLayout, HomeLayout, PlaygroundLayout, ProblemsLayout, CompanyLayout, ResourcesLayout, ProductLayout, ArticlesLayout, PageNotFoundLayout } from "./RouteLayouts";
 
 const homeRoute: RouteObject = {
   element: <HomeLayout />,
@@ -25,6 +27,10 @@ const authRoute: RouteObject = {
   path: "auth",
   children: [
     {
+      index: true,
+      element: <PageNotFound />,
+    },
+    {
       path: "log-in",
       element: <LogIn />,
     },
@@ -40,8 +46,27 @@ const playgroundRoute: RouteObject = {
   path: "playground",
   children: [
     {
+      index: true,
+      element: <PageNotFound />,
+    },
+    {
       path: "test",
       element: <TestPlayground />,
+    },
+  ],
+};
+
+const articlesRoute: RouteObject = {
+  element: <ArticlesLayout />,
+  path: "articles",
+  children: [
+    {
+      index: true,
+      element: <PageNotFound />,
+    },
+    {
+      path: "test",
+      element: <Articles />,
     },
   ],
 };
@@ -50,6 +75,10 @@ const forumRoute: RouteObject = {
   element: <ForumLayout />,
   path: "forum",
   children: [
+    {
+      index: true,
+      element: <PageNotFound />,
+    },
     {
       path: "test",
       element: <Forum />,
@@ -61,6 +90,10 @@ const problemsRoute: RouteObject = {
   element: <ProblemsLayout />,
   path: "problems",
   children: [
+    {
+      index: true,
+      element: <PageNotFound />,
+    },
     {
       path: "test",
       element: <Problems />,
@@ -76,6 +109,10 @@ const companyRoute: RouteObject = {
   element: <CompanyLayout />,
   path: "company",
   children: [
+    {
+      index: true,
+      element: <PageNotFound />,
+    },
     {
       path: "about-us",
       element: <AboutUs />,
@@ -96,6 +133,10 @@ const productRoute: RouteObject = {
   path: "product",
   children: [
     {
+      index: true,
+      element: <PageNotFound />,
+    },
+    {
       path: "newability",
       element: <Newability />,
     },
@@ -115,6 +156,10 @@ const resourcesRoute: RouteObject = {
   path: "resources",
   children: [
     {
+      index: true,
+      element: <PageNotFound />,
+    },
+    {
       path: "contacts",
       element: <Contacts />,
     },
@@ -125,7 +170,18 @@ const resourcesRoute: RouteObject = {
   ],
 };
 
-const defaultRoutes: RouteObject[] = [homeRoute, authRoute, playgroundRoute, forumRoute, problemsRoute, companyRoute, productRoute, resourcesRoute];
+const errorRoute: RouteObject = {
+  element: <PageNotFoundLayout />,
+  path: "*",
+  children: [
+    {
+      path: "*",
+      element: <PageNotFound />,
+    },
+  ],
+};
+
+const defaultRoutes: RouteObject[] = [homeRoute, authRoute, playgroundRoute, forumRoute, problemsRoute, companyRoute, productRoute, resourcesRoute, articlesRoute, errorRoute];
 
 const protectedRoutes: RouteObject[] = [];
 

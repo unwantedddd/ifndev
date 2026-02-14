@@ -66,13 +66,6 @@ const Footer = () => {
                             </Link>
                         </div>
                     </div>
-
-                    <div className="flex gap-3 md:justify-end items-start mt-4 md:mt-0">
-                        <Link to="https://t.me/ifnotdev" className="w-8 h-8 flex items-center justify-center rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-colors">
-                            <FaTelegramPlane />
-                        </Link>
-                    </div>
-
                 </div>
             </div>
         </footer>

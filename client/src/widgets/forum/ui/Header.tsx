@@ -1,22 +1,22 @@
 import { Button, Logo } from "@/shared/ui/base";
-import { Link } from "react-router";
+import { Link, NavLink } from "react-router";
 import { FaSearch } from "react-icons/fa";
 
 const Header = () => {
   return (
     <div className="w-full sticky top-0 z-50 px-4">
-      <div className="mx-auto max-w-7xl mt-4 p-4 pl-6 bg-card rounded-2xl flex items-center justify-between shadow-xl border border-border">
-        
-        <Link to="/" className="mr-8">
+      <div className="mx-auto max-w-6xl p-3 mt-4 bg-card rounded-xl flex items-center justify-between shadow-2xl border border-border">
+
+        <Link to="/" className="mr-4">
           <Logo />
         </Link>
 
-        <div className="flex items-center gap-6 flex-1 justify-end">
+        <div className="flex items-center gap-6">
           <nav className="hidden md:block">
-            <ul className="flex items-center gap-6 mr-4">
+            <ul className="flex items-center gap-6">
               <li>
                 <Link
-                  to="/articles"
+                  to="/articles/test"
                   className="text-foreground hover:text-primary transition-colors text-base font-medium"
                 >
                   Articles
@@ -31,33 +31,37 @@ const Header = () => {
                 </Link>
               </li>
               <li>
-                <Link
+                <NavLink
                   to="/forum/test"
-                  className="text-foreground hover:text-primary transition-colors text-base font-medium"
+                  className={({ isActive }) =>
+                    `text-lg font-medium transition-colors ${isActive
+                      ? "text-primary"
+                      : "text-foreground hover:text-primary"
+                    }`
+                  }
                 >
                   Forums
-                </Link>
+                </NavLink>
               </li>
             </ul>
           </nav>
 
-          <div className="relative hidden md:block w-64">
+          <div className="relative hidden md:block w-56">
             <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none">
-              <FaSearch className="text-muted-foreground" />
+              <FaSearch className="text-muted-foreground text-xs" />
             </div>
-            <input 
-              type="text" 
-              placeholder="Search..." 
-              className="w-full h-10 pl-10 pr-4 rounded-md border border-input bg-background text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent transition-all"
+            <input
+              type="text"
+              placeholder="Search forum..."
+              className="w-full h-9 pl-9 pr-4 rounded-md border border-input bg-background text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent transition-all shadow-sm"
             />
           </div>
 
-          <div className="flex items-center gap-4 pl-4">
-             <Link to="/auth/log-in">
+          <div className="pl-2 border-l border-border md:border-none">
+            <Link to="/auth/log-in">
               <Button
-                className="rounded-lg px-6 font-medium shadow-sm cursor-pointer"
+                className="rounded-md px-5 h-9 text-base font-medium cursor-pointer shadow-sm"
                 variant="primary"
-                size="large"
               >
                 Log In
               </Button>
