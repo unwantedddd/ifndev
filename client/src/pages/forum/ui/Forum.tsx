@@ -65,11 +65,8 @@ const Forum = () => {
 
     return (
         <div className="flex-1 bg-background text-foreground font-sans relative">
-
             <div className="fixed bottom-0 left-0 w-full z-50 pointer-events-none">
-                
                 <div className="mx-auto px-4 relative h-0">
-                    
                     <div className="
                         absolute 
                         bottom-10 right-10
@@ -208,7 +205,6 @@ const Forum = () => {
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         ))}
                     </div>

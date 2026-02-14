@@ -1,6 +1,8 @@
 import { Layout, ScreenLayout } from "@/shared/ui/layout";
 import { BaseFooter, BaseHeader } from "@/widgets/base";
 import { ForumHeader } from "@/widgets/forum";
+import { ArticlesHeader } from "@/widgets/articles";
+import { ProblemsHeader } from "@/widgets/problems";
 
 export const HomeLayout = () => (
 	<Layout header={<BaseHeader />} footer={<BaseFooter />} />
@@ -19,7 +21,7 @@ export const ForumLayout = () => (
 );
 
 export const ProblemsLayout = () => (
-	<Layout header={<BaseHeader />} footer={<BaseFooter />} />
+	<Layout header={<ProblemsHeader />} footer={<BaseFooter />} />
 );
 
 export const CompanyLayout = () => (
@@ -31,5 +33,13 @@ export const ResourcesLayout = () => (
 );
 
 export const ProductLayout = () => (
+	<Layout header={<BaseHeader />} footer={<BaseFooter />} />
+);
+
+export const ArticlesLayout = () => (
+	<Layout header={<ArticlesHeader />} footer={<BaseFooter />} />
+);
+
+export const PageNotFoundLayout = () => (
 	<Layout header={<BaseHeader />} footer={<BaseFooter />} />
 );
