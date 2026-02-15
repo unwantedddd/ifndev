@@ -1,8 +1,29 @@
 import { Logo } from '@/shared/ui/base';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { FaGithub, FaGoogle } from 'react-icons/fa';
+import { useLogIn } from '../model/useLogIn';
 
 const LogIn = () => {
+  const logIn = useLogIn();
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+    const formData = new FormData(e.currentTarget as HTMLFormElement);
+    const data = Object.fromEntries(formData);
+    await logIn.mutateAsync({
+      email: data.email,
+      password: data.password,
+    });
+    } catch (error) {
+      console.error("Error during log in:", error);
+    }
+    finally {
+      navigate("/");
+    }
+  };
+
   return (
     <div className="flex-1 w-full flex items-center justify-center bg-background p-4">
       <div className="w-full max-w-md bg-card border border-border rounded-2xl shadow-sm p-8">
@@ -16,12 +37,13 @@ const LogIn = () => {
           </p>
         </div>
 
-        <div className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
             <label className="text-sm font-medium leading-none text-foreground" htmlFor="email">
               Email
             </label>
             <input
+              name="email"
               id="email"
               placeholder="name@example.com"
               className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent transition-all"
@@ -39,6 +61,7 @@ const LogIn = () => {
               </a>
             </div>
             <input
+              name="password"
               id="password"
               placeholder="••••••••"
               className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent transition-all"
@@ -46,10 +69,10 @@ const LogIn = () => {
             />
           </div>
 
-          <button className="w-full h-10 px-4 py-2 bg-primary text-primary-foreground hover:bg-primary/90 inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring shadow cursor-pointer">
+          <button type="submit" className="w-full h-10 px-4 py-2 bg-primary text-primary-foreground hover:bg-primary/90 inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring shadow cursor-pointer">
             Sign In
           </button>
-        </div>
+        </form>
 
         <div className="relative my-8">
           <div className="absolute inset-0 flex items-center">

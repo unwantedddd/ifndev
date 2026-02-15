@@ -8,9 +8,11 @@ interface LayoutProps {
 
 const Layout: FC<LayoutProps> = ({ header, footer }) => {
 	return (
-		<div className="min-h-screen flex flex-col">
+		<div className="min-h-screen flex flex-col ">
+			<div className="flex flex-col gap-10">
 			{header}
-			<Outlet />
+				<Outlet />
+			</div>
 			{footer}
 		</div>
 	);

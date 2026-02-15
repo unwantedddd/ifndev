@@ -10,7 +10,8 @@ import { Customers, Pricing, Newability } from "@/pages/product";
 import { Contacts, Community } from "@/pages/resources";
 import { Articles } from "@/pages/articles";
 import { PageNotFound } from "@/pages/error";
-import { AuthLayout, ForumLayout, HomeLayout, PlaygroundLayout, ProblemsLayout, CompanyLayout, ResourcesLayout, ProductLayout, ArticlesLayout, PageNotFoundLayout } from "./RouteLayouts";
+import { AuthLayout, ForumLayout, HomeLayout, PlaygroundLayout, ProblemsLayout, CompanyLayout, ResourcesLayout, ProductLayout, ArticlesLayout, PageNotFoundLayout, ProfileLayout } from "./RouteLayouts";
+import ProfilePage from "@/pages/profile/ui/Profile";
 
 const homeRoute: RouteObject = {
   element: <HomeLayout />,
@@ -181,9 +182,20 @@ const errorRoute: RouteObject = {
   ],
 };
 
+const profileRoute: RouteObject = {
+  element: <ProfileLayout/>,
+  path: "profile",
+  children: [
+    {
+      index: true,
+      element: <ProfilePage />,
+    },
+  ],
+};
+
 const defaultRoutes: RouteObject[] = [homeRoute, authRoute, playgroundRoute, forumRoute, problemsRoute, companyRoute, productRoute, resourcesRoute, articlesRoute, errorRoute];
 
-const protectedRoutes: RouteObject[] = [];
+const protectedRoutes: RouteObject[] = [profileRoute];
 
 const router = createBrowserRouter([
   {

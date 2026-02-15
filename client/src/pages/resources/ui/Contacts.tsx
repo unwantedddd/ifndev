@@ -3,13 +3,8 @@ import { Link } from "react-router";
 
 const Contacts = () => {
   return (
-    // Изменил p-6 на pt-24 (отступ сверху) и px-6
-    <div className="flex-1 bg-background text-foreground font-sans px-6 pt-24 pb-20">
-      
-      {/* Ограничил ширину max-w-3xl и выровнял по центру mx-auto */}
+    <div className="flex-1 bg-background text-foreground font-sans px-6 py-20">
       <div className="max-w-3xl mx-auto flex flex-col gap-12">
-
-        {/* Блок с текстом и контактами */}
         <div className="text-center space-y-8">
           <div className="space-y-4">
             <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight">Get in touch</h1>
@@ -18,7 +13,6 @@ const Contacts = () => {
             </p>
           </div>
 
-          {/* Карточки с контактами (Email/Office) теперь горизонтально или плиткой */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-12">
             <div className="flex items-center gap-4 bg-card/50 px-6 py-4 rounded-2xl border border-border/50 shadow-sm">
               <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary shrink-0">
@@ -42,7 +36,6 @@ const Contacts = () => {
           </div>
         </div>
 
-        {/* Форма теперь по центру и снизу */}
         <div className="bg-card p-8 md:p-10 rounded-3xl border border-border shadow-lg">
           <form className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -88,7 +81,6 @@ const Contacts = () => {
           </form>
         </div>
 
-        {/* Соцсети в самом низу */}
         <div className="text-center pt-8 border-t border-border/50">
           <h3 className="font-bold text-xs uppercase tracking-wide mb-6 text-muted-foreground">Follow Us</h3>
           <div className="flex justify-center gap-4">
@@ -120,7 +112,6 @@ const Contacts = () => {
             </Link>
           </div>
         </div>
-
       </div>
     </div>
   );
