@@ -43,3 +43,7 @@ export const ArticlesLayout = () => (
 export const PageNotFoundLayout = () => (
 	<Layout header={<BaseHeader />} footer={<BaseFooter />} />
 );
+
+export const ProfileLayout = () => (
+	<Layout header={<BaseHeader />} footer={<BaseFooter />} />
+);

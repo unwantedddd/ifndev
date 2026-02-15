@@ -170,4 +170,17 @@ export const getMe = async (req: MutatedRequest, res: Response) => {
 		logError("GetMe error:", err);
 		return res.status(500).json({ error: "Internal Server Error" });
 	}
+	
+};
+
+export const logout = (req: Request, res: Response) => {
+    const isProduction = process.env.NODE_ENV === "production";
+
+    res.clearCookie("authToken", {
+        httpOnly: true,
+        secure: isProduction,
+        sameSite: isProduction ? "strict" : "lax",
+    });
+
+    return res.status(200).json({ message: "Logged out successfully" });
 };

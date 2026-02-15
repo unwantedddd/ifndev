@@ -37,7 +37,7 @@ const DifficultyBadge = ({ level }: { level: Difficulty }) => {
 
 const Problems = () => {
     return (
-        <div className="flex-1 bg-background text-foreground font-sans p-6 pb-20">
+        <div className="flex-1 bg-background text-foreground font-sans p-6">
             <div className="max-w-6xl mx-auto space-y-10">
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                     <div className="space-y-1">
