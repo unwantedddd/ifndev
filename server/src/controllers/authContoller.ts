@@ -5,6 +5,7 @@ import { z } from "zod";
 import { prisma } from "../config/database.ts";
 import { logError } from "../config/logger.ts";
 import type { MutatedRequest } from "../types/authTypes.ts";
+import type { Prisma, User } from "../../generated/prisma/client.ts";
 
 if (!process.env.JWT_SECRET) {
 	throw new Error("JWT_SECRET is not defined in the environment variables.");
@@ -34,22 +35,24 @@ export const signUp = async (req: Request, res: Response) => {
 		const salt = await bcrypt.genSalt(10);
 		const hashedPassword = await bcrypt.hash(password, salt);
 
-		const user = await prisma.user.create({
-			data: {
-				email,
-				username,
-				password_hash: hashedPassword,
-			},
-			select: { id: true },
-		});
+		const [ { id: userId } ] = await prisma.$transaction([
+			prisma.user.create({
+				data: {
+					email,
+					username,
+					password_hash: hashedPassword,
+				},
+				select: { id: true },
+			})
+		]);
 
 		const isProduction = process.env.NODE_ENV === "production";
 
 		const jwtToken = jwt.sign(
-			{ id: user.id },
+			{ userId },
 			process.env.JWT_SECRET as string,
 			{
-				expiresIn: "7d",
+				expiresIn: "67d",
 			},
 		);
 
