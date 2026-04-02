@@ -4,7 +4,7 @@ import { Link } from "react-router";
 
 const AboutUs = () => {
     return (
-        <div className="flex-1 bg-background text-foreground font-sans py-16 px-4">
+        <div className="flex-1 bg-background text-foreground font-sans py-16 px-4 ">
             <div className="max-w-4xl mx-auto text-center mb-16">
                 <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-6">
                     Meet the <span className="text-primary">Minds</span> Behind{' '}
@@ -17,7 +17,8 @@ const AboutUs = () => {
                 </p>
             </div>
 
-            <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 ">
+                
                 <div className="group bg-card border border-border rounded-2xl p-6 flex flex-col items-center text-center shadow-sm hover:shadow-md hover:border-primary/50 transition-all duration-300">
                     <div className="relative mb-6">
                         <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-background ring-2 ring-border group-hover:ring-primary transition-all duration-300">
@@ -143,6 +144,67 @@ const AboutUs = () => {
                     </div>
                 </div>
 
+                <div className="group bg-card border border-border rounded-2xl p-6 flex flex-col items-center text-center shadow-sm hover:shadow-md hover:border-primary/50 transition-all duration-300 col-span-2">
+                    <div className="relative mb-6">
+                        <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-background ring-2 ring-border group-hover:ring-primary transition-all duration-300">
+                            <img
+                                src="https://avatars.githubusercontent.com/u/95939142?v=4"
+                                alt="Syniachenko Bohdan"
+                                className="w-full h-full"
+                            />
+                        </div>
+                    </div>
+                    <h3 className="text-xl font-bold text-foreground mb-1">
+                        Syniachenko Bohdan
+                    </h3>
+                    <p className="text-sm font-semibold text-primary uppercase tracking-wide mb-4">
+                        Front-end Developer
+                    </p>
+                    <p className="text-sm text-muted-foreground leading-relaxed mb-6">
+                        A Pakistani coworker with 10 yrs exp in PHP
+                    </p>
+                    <div className="flex items-center gap-3 mt-auto">
+                        <Link to="https://www.linkedin.com/in/bohdan-syniachenko/" className="p-2 rounded-full bg-secondary text-secondary-foreground hover:bg-primary hover:text-primary-foreground transition-all duration-300">
+                            <FaLinkedinIn size={16} />
+                        </Link>
+                        <Link to="https://github.com/BohdanSV-main" className="p-2 rounded-full bg-secondary text-secondary-foreground hover:bg-primary hover:text-primary-foreground transition-all duration-300">
+                            <FaGithub size={16} />
+                        </Link>
+                        <Link to="https://t.me/DUNAKd" className="p-2 rounded-full bg-secondary text-secondary-foreground hover:bg-primary hover:text-primary-foreground transition-all duration-300">
+                            <FaTelegramPlane size={16} />
+                        </Link>
+                    </div>
+                </div>
+
+                <div className="group bg-card border border-border rounded-2xl p-6 flex flex-col items-center text-center shadow-sm hover:shadow-md hover:border-primary/50 transition-all duration-300 col-span-2">
+                    <div className="relative mb-6">
+                        <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-background ring-2 ring-border group-hover:ring-primary transition-all duration-300">
+                            <img
+                                src="https://avatars.githubusercontent.com/u/111641537?v=4"
+                                alt="Kucha Yevhen"
+                                className="w-full h-full"
+                            />
+                        </div>
+                    </div>
+                    <h3 className="text-xl font-bold text-foreground mb-1">
+                        Kucha Yevhen
+                    </h3>
+                    <p className="text-sm font-semibold text-primary uppercase tracking-wide mb-4">
+                        Front-end Developer
+                    </p>
+                    <p className="text-sm text-muted-foreground leading-relaxed mb-6">
+                        Making user flows into intuitive experiences.
+                    </p>
+                    <div className="flex items-center gap-3 mt-auto">
+                        
+                        <Link to="https://github.com/Anastas18" className="p-2 rounded-full bg-secondary text-secondary-foreground hover:bg-primary hover:text-primary-foreground transition-all duration-300">
+                            <FaGithub size={16} />
+                        </Link>
+                        <Link to="https://t.me/Evgen35a" className="p-2 rounded-full bg-secondary text-secondary-foreground hover:bg-primary hover:text-primary-foreground transition-all duration-300">
+                            <FaTelegramPlane size={16} />
+                        </Link>
+                    </div>
+                </div>
             </div>
         </div>
     );

@@ -7,9 +7,9 @@ const mockData = {
 		{ id: 3, title: 'Deep Dive into Rust Ownership', tags: ['Rust', 'Memory'] },
 	],
 	challenges: [
-		{ id: 1, title: 'Two Sum II', difficulty: 'Medium' },
+		{ id: 1, title: 'Two Sum I', difficulty: 'Medium' },
 		{ id: 2, title: 'Two Sum II', difficulty: 'Medium' },
-		{ id: 3, title: 'Two Sum II', difficulty: 'Medium' },
+		{ id: 3, title: 'Two Sum LXVII', difficulty: 'Medium' },
 	],
 	discussions: [
 		{ id: 1, title: 'Best practices for API design?', replies: 25, user: 'Alex' },

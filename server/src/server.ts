@@ -5,6 +5,7 @@ import express from "express";
 import { prisma } from "./config/database.ts";
 
 import authRouter from "./routers/authRouter.ts";
+import labRouter from "./routers/labRouter.ts";
 
 const app = express();
 
@@ -14,14 +15,16 @@ app.use(express.json());
 app.use(
 	cors({
 		credentials: true,
-		origin: ["http://localhost:5173", "https://arteecool.com.ua"],
+		origin: ["http://localhost:5173", "https://arteecool.com.ua", "https://h7s7dhwx-5173.euw.devtunnels.ms"],
 	}),
 );
 app.use(cookieParser());
 
-app.use("/static/images", express.static(path.join(process.cwd(), "images")));
+app.use("/static/images", express.static(path.join(process.cwd(), "../", "images")));
 
 app.use("/api/auth", authRouter);
+
+app.use("/api/lab", labRouter);
 
 const start = async () => {
 	try {
