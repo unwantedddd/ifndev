@@ -4,7 +4,7 @@ import type { MutatedRequest } from "../types/authTypes.ts";
 import type { Prisma } from "../../generated/prisma/client.ts";
 
 if (!process.env.JWT_SECRET) {
-	throw new Error("JWT_SECRET is not defined in the environment variables.");
+    throw new Error("JWT_SECRET is not defined in the environment variables.");
 }
 
 export const getProfile = async (req: MutatedRequest, res: Response) => {
@@ -25,7 +25,6 @@ export const getProfile = async (req: MutatedRequest, res: Response) => {
                 bio: true,
                 avatar_url: true,
                 description: true,
-
             },
         });
 
@@ -38,7 +37,7 @@ export const getProfile = async (req: MutatedRequest, res: Response) => {
         console.error("Error fetching user profile:", error);
         res.status(500).json({ message: "Internal server error" });
     }
-}
+};
 
 export const updateAvatar = async (req: MutatedRequest, res: Response) => {
     const userId = req.userId;
@@ -58,13 +57,17 @@ export const updateAvatar = async (req: MutatedRequest, res: Response) => {
         } else if (avatar_url) {
             finalAvatarUrl = avatar_url;
         } else {
-            return res.status(400).json({ message: "Please upload a file or provide an avatar URL" });
+            return res
+                .status(400)
+                .json({
+                    message: "Please upload a file or provide an avatar URL",
+                });
         }
 
         const updatedUser = await prisma.user.update({
             where: { id: userId },
-            data: { 
-                avatar_url: finalAvatarUrl 
+            data: {
+                avatar_url: finalAvatarUrl,
             },
             select: {
                 id: true,
@@ -72,21 +75,23 @@ export const updateAvatar = async (req: MutatedRequest, res: Response) => {
                 email: true,
                 avatar_url: true,
                 bio: true,
-            }
+            },
         });
 
-        return res.status(200).json({ 
-            message: "Avatar updated successfully", 
-            user: updatedUser 
+        return res.status(200).json({
+            message: "Avatar updated successfully",
+            user: updatedUser,
         });
-
     } catch (error) {
         console.error("Error updating avatar:", error);
         res.status(500).json({ message: "Internal server error" });
     }
-}
+};
 
-export const batchUpdateProfile = async (req: MutatedRequest, res: Response) => {
+export const batchUpdateProfile = async (
+    req: MutatedRequest,
+    res: Response,
+) => {
     const userId = req.userId;
 
     if (!userId) {
@@ -100,7 +105,8 @@ export const batchUpdateProfile = async (req: MutatedRequest, res: Response) => 
         req.body.avatarUrl = uploadedAvatarUrl;
     }
 
-    const { username, email, avatar_url, description, role, avatarUrl } = req.body;
+    const { username, email, avatar_url, description, role, avatarUrl } =
+        req.body;
 
     const updateData: Prisma.UserUpdateInput = {
         ...(username && { username }),
@@ -121,14 +127,38 @@ export const batchUpdateProfile = async (req: MutatedRequest, res: Response) => 
                 email: true,
                 avatar_url: true,
                 description: true,
-                role: true
-            }
+                role: true,
+            },
         });
 
-            return res.status(200).json({ message: "Profile updated!"});
-        
+        return res.status(200).json({ message: "Profile updated!" });
     } catch (error) {
         return res.status(500).json({ message: "Internal server error" });
     }
+};
 
+export const deleteProfile = async (req: MutatedRequest, res: Response) => {
+    const userId = req.userId;
+
+    if (!userId) {
+        return res.status(401).json({ message: "Unauthorized" });
+    }
+
+    try {
+        await prisma.user.delete({
+            where: { id: userId },
+        });
+        const isProduction = process.env.NODE_ENV === "production";
+        res.clearCookie("authtoken", {
+            httpOnly: true,
+            secure: isProduction,
+            sameSite: isProduction ? "strict" : "lax",
+        });
+        return res
+            .status(200)
+            .json({ message: "Profile deleted successfully" });
+    } catch (error) {
+        console.error("Error deleting profile:", error);
+        return res.status(500).json({ message: "Internal server error" });
+    }
 };
