@@ -42,9 +42,9 @@ const Header = () => {
         <div className="flex items-center flex-1 justify-end gap-8">
           <nav className="hidden md:block">
             <ul className="flex items-center gap-8 text-sm font-medium">
-              <li><Link to="/articles/test" className="text-muted-foreground hover:text-foreground transition-colors">Articles</Link></li>
-              <li><Link to="/problems/test" className="text-muted-foreground hover:text-foreground transition-colors">Problems</Link></li>
-              <li><Link to="/forum/test" className="text-muted-foreground hover:text-foreground transition-colors">Forums</Link></li>
+              <li><Link to="/articles" className="text-muted-foreground hover:text-foreground transition-colors">Articles</Link></li>
+              <li><Link to="/problems" className="text-muted-foreground hover:text-foreground transition-colors">Problems</Link></li>
+              <li><Link to="/forum" className="text-muted-foreground hover:text-foreground transition-colors">Forums</Link></li>
             </ul>
           </nav>
 

@@ -63,10 +63,6 @@ const articlesRoute: RouteObject = {
   children: [
     {
       index: true,
-      element: <PageNotFound />,
-    },
-    {
-      path: "test",
       element: <Articles />,
     },
   ],
@@ -78,10 +74,6 @@ const forumRoute: RouteObject = {
   children: [
     {
       index: true,
-      element: <PageNotFound />,
-    },
-    {
-      path: "test",
       element: <Forum />,
     },
   ],

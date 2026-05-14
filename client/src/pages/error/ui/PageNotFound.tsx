@@ -37,7 +37,7 @@ const NotFoundPage = () => {
             </button>
           </Link>
 
-          <Link to="/problems/test">
+          <Link to="/problems">
             <button className="h-11 px-8 rounded-lg border border-input bg-background hover:bg-accent hover:text-accent-foreground font-medium transition-colors cursor-pointer flex items-center gap-2">
                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
@@ -47,10 +47,6 @@ const NotFoundPage = () => {
           </Link>
         </div>
 
-      </div>
-
-      <div className="absolute bottom-8 text-xs text-muted-foreground">
-         Error Code: 404_NOT_FOUND
       </div>
     </div>
   );

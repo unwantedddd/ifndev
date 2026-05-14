@@ -26,7 +26,7 @@ const Header = () => {
             <ul className="flex items-center gap-6">
               <li>
                 <Link
-                  to="/articles/test"
+                  to="/articles"
                   className="text-foreground hover:text-primary transition-colors text-base font-medium"
                 >
                   Articles
@@ -34,7 +34,7 @@ const Header = () => {
               </li>
               <li>
                 <Link
-                  to="/problems/test"
+                  to="/problems"
                   className="text-foreground hover:text-primary transition-colors text-base font-medium"
                 >
                   Problems
@@ -42,7 +42,7 @@ const Header = () => {
               </li>
               <li>
                 <NavLink
-                  to="/forum/test"
+                  to="/forum"
                   className={({ isActive }) =>
                     `text-lg font-medium transition-colors ${isActive
                       ? "text-primary"
