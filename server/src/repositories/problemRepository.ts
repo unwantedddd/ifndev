@@ -102,25 +102,50 @@ const slugExists = async (slug: string, excludeId?: string): Promise<boolean> =>
 	return true;
 };
 
+// BunSQLiteAdapter v1.3.1 does not support connection reservation, which Prisma
+// requires for nested relational writes (connect/set). Tags are managed via
+// direct $executeRaw on the implicit junction table instead.
+
+const connectTags = async (problemId: string, tagIds: string[]): Promise<void> => {
+	await Promise.all(
+		tagIds.map((tagId) =>
+			prisma.$executeRaw`INSERT OR IGNORE INTO "_ProblemToTag" ("A", "B") VALUES (${problemId}, ${tagId})`
+		)
+	);
+};
+
 const create = async ({ tagIds, ...rest }: CreateProblemData) => {
-	return prisma.problem.create({
-		data: {
-			...rest,
-			tags: { connect: tagIds.map((id) => ({ id })) },
-		},
+	const { id } = await prisma.problem.create({
+		data: rest,
+		select: { id: true },
+	});
+
+	if (tagIds.length > 0) {
+		await connectTags(id, tagIds);
+	}
+
+	return prisma.problem.findUniqueOrThrow({
+		where: { id },
 		select: FULL_SELECT,
 	});
 };
 
 const update = async (id: string, { tagIds, ...rest }: UpdateProblemData) => {
-	return prisma.problem.update({
+	await prisma.problem.update({
 		where: { id },
-		data: {
-			...rest,
-			...(tagIds !== undefined && {
-				tags: { set: tagIds.map((tid) => ({ id: tid })) },
-			}),
-		},
+		data: rest,
+		select: { id: true },
+	});
+
+	if (tagIds !== undefined) {
+		await prisma.$executeRaw`DELETE FROM "_ProblemToTag" WHERE "A" = ${id}`;
+		if (tagIds.length > 0) {
+			await connectTags(id, tagIds);
+		}
+	}
+
+	return prisma.problem.findUniqueOrThrow({
+		where: { id },
 		select: FULL_SELECT,
 	});
 };

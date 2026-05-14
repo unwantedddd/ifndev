@@ -49,10 +49,10 @@ export const signUp = async (req: Request, res: Response) => {
 		const isProduction = process.env.NODE_ENV === "production";
 
 		const jwtToken = jwt.sign(
-			{ userId },
+			{ id: userId },
 			process.env.JWT_SECRET as string,
 			{
-				expiresIn: "67d",
+				expiresIn: "7d",
 			},
 		);
 

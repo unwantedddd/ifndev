@@ -4,7 +4,7 @@ import { LogIn, SignUp } from "@/pages/auth";
 import { Home } from "@/pages/home";
 import { TestPlayground } from "@/pages/playground";
 import { Forum } from "@/pages/forum";
-import { Problems, CreateProblem } from "@/pages/problems";
+import { Problems, CreateProblem, ProblemDetail } from "@/pages/problems";
 import { AboutUs, Careers, Blog } from "@/pages/company";
 import { Customers, Pricing, Newability } from "@/pages/product";
 import { Contacts, Community } from "@/pages/resources";
@@ -93,15 +93,15 @@ const problemsRoute: RouteObject = {
   children: [
     {
       index: true,
-      element: <PageNotFound />,
-    },
-    {
-      path: "test",
       element: <Problems />,
     },
     {
       path: "create-problem",
       element: <CreateProblem />,
+    },
+    {
+      path: ":slug",
+      element: <ProblemDetail />,
     },
   ],
 };

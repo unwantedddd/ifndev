@@ -7,20 +7,18 @@ const LogIn = () => {
   const logIn = useLogIn();
   const navigate = useNavigate();
 
-  const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    try {
-    const formData = new FormData(e.currentTarget as HTMLFormElement);
+    const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData);
-    await logIn.mutateAsync({
-      email: data.email,
-      password: data.password,
-    });
+    try {
+      await logIn.mutateAsync({
+        email: String(data["email"] ?? ""),
+        password: String(data["password"] ?? ""),
+      });
+      navigate("/");
     } catch (error) {
       console.error("Error during log in:", error);
-    }
-    finally {
-      navigate("/");
     }
   };
 
