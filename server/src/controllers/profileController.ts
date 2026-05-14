@@ -20,9 +20,8 @@ export const getProfile = async (req: MutatedRequest, res: Response) => {
             select: {
                 id: true,
                 email: true,
-                name: true,
+                username: true,
                 createdAt: true,
-                bio: true,
                 avatar_url: true,
                 description: true,
             },
@@ -74,7 +73,6 @@ export const updateAvatar = async (req: MutatedRequest, res: Response) => {
                 username: true,
                 email: true,
                 avatar_url: true,
-                bio: true,
             },
         });
 

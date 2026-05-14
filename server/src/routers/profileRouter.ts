@@ -1,12 +1,18 @@
 import express from "express";
-import { getProfile, updateAvatar } from "../controllers/profileController.ts";
+import {
+	getProfile,
+	updateAvatar,
+	batchUpdateProfile,
+	deleteProfile,
+} from "../controllers/profileController.ts";
+import { authMiddleware } from "../middlewares/authMiddleware.ts";
 import { upload } from "../middlewares/fileUploadMiddleware.ts";
 
 const router = express.Router();
 
-router.post("/updateAvatar", upload.single("avatar"), updateAvatar);
-router.get("/getProfile", getProfile);
-router.post("/updateProfile", upload.single("avatar"), authMiddleware, batchUpdateProfile);\
-router.post("/deleteProfile", verifyToken, deleteProfile);
+router.get("/getProfile", authMiddleware, getProfile);
+router.post("/updateAvatar", authMiddleware, upload.single("avatar"), updateAvatar);
+router.post("/updateProfile", authMiddleware, upload.single("avatar"), batchUpdateProfile);
+router.post("/deleteProfile", authMiddleware, deleteProfile);
 
 export default router;

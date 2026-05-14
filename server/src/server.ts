@@ -6,6 +6,10 @@ import { prisma } from "./config/database.ts";
 
 import authRouter from "./routers/authRouter.ts";
 import labRouter from "./routers/labRouter.ts";
+import profileRouter from "./routers/profileRouter.ts";
+import problemRouter from "./routers/problemRouter.ts";
+import submissionRouter from "./routers/submissionRouter.ts";
+import tagRouter from "./routers/tagRouter.ts";
 
 const app = express();
 
@@ -23,8 +27,11 @@ app.use(cookieParser());
 app.use("/static/images", express.static(path.join(process.cwd(), "../", "images")));
 
 app.use("/api/auth", authRouter);
-
 app.use("/api/lab", labRouter);
+app.use("/api/profile", profileRouter);
+app.use("/api/problems", problemRouter);
+app.use("/api/submissions", submissionRouter);
+app.use("/api/tags", tagRouter);
 
 const start = async () => {
 	try {
